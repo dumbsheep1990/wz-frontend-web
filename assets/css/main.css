@@ -1,0 +1,131 @@
+/* 主色调 */
+:root {
+  --primary-color: #ff6900;
+  --primary-hover: #e65d00;
+  --secondary-color: #4caf50;
+  --secondary-hover: #388e3c;
+  --text-color: #333333;
+  --text-light: #666666;
+  --border-color: #e0e0e0;
+  --bg-gray: #f5f5f5;
+  --bg-light: #fafafa;
+}
+
+/* 通用样式 */
+body {
+  font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
+  color: var(--text-color);
+  background-color: var(--bg-gray);
+}
+
+/* 主题色按钮 */
+.btn-primary {
+  background-color: var(--primary-color);
+  border-color: var(--primary-color);
+  color: white;
+}
+
+.btn-primary:hover {
+  background-color: var(--primary-hover);
+  border-color: var(--primary-hover);
+}
+
+.btn-secondary {
+  background-color: var(--secondary-color);
+  border-color: var(--secondary-color);
+  color: white;
+}
+
+.btn-secondary:hover {
+  background-color: var(--secondary-hover);
+  border-color: var(--secondary-hover);
+}
+
+/* 链接样式 */
+.link-primary {
+  color: var(--primary-color);
+}
+
+.link-primary:hover {
+  color: var(--primary-hover);
+  text-decoration: underline;
+}
+
+/* 卡片样式 */
+.card {
+  background-color: white;
+  border-radius: 4px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+/* 分类按钮 */
+.category-btn {
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.category-btn:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+.category-btn.active {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+/* 表格样式 */
+.table-basic {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.table-basic th {
+  background-color: var(--bg-light);
+  font-weight: bold;
+  text-align: left;
+  padding: 0.75rem;
+  border-bottom: 2px solid var(--border-color);
+}
+
+.table-basic td {
+  padding: 0.75rem;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.table-basic tr:hover {
+  background-color: var(--bg-light);
+}
+
+/* 分页器样式 */
+.pagination {
+  display: flex;
+  list-style: none;
+  padding: 0;
+  margin: 1rem 0;
+  justify-content: center;
+}
+
+.pagination li {
+  margin: 0 0.25rem;
+}
+
+.pagination a {
+  display: block;
+  padding: 0.5rem 0.75rem;
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  color: var(--text-color);
+  text-decoration: none;
+}
+
+.pagination a:hover {
+  background-color: var(--bg-light);
+}
+
+.pagination .active a {
+  background-color: var(--primary-color);
+  color: white;
+  border-color: var(--primary-color);
+} 

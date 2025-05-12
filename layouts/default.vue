@@ -25,6 +25,7 @@ const siteConfig = ref({
 // 主导航菜单
 const mainNavigation = [
   { name: '首页', path: '/' },
+  { name: '万知市场', path: '/market' },
   { name: '内容', path: '/content' },
   { name: '推荐', path: '/recommend' },
   { name: '会员中心', path: '/person' },

@@ -1,141 +1,169 @@
 <template>
-  <footer class="w-full bg-gray-100 py-8">
-    <div class="container mx-auto px-4">
-      <!-- 友情链接 -->
-      <div v-if="links && links.length > 0" class="mb-6">
-        <h3 class="text-lg font-medium mb-3">友情链接</h3>
+  <footer class="bg-white mt-8 border-t border-gray-200">
+    <!-- 友情链接 -->
+    <div class="container mx-auto px-4 py-6">
+      <div class="mb-4">
+        <h3 class="text-base font-semibold mb-3">主题：</h3>
+        <div class="flex flex-wrap">
+          <NuxtLink 
+            v-for="(link, index) in themeLinks" 
+            :key="index" 
+            :to="link.url" 
+            class="mr-4 mb-2 text-sm text-gray-600 hover:text-orange-500"
+          >
+            {{ link.name }}
+          </NuxtLink>
+        </div>
+      </div>
+      <div class="mb-4">
+        <h3 class="text-base font-semibold mb-3">热门行业：</h3>
+        <div class="flex flex-wrap">
+          <NuxtLink 
+            v-for="(link, index) in industryLinks" 
+            :key="index" 
+            :to="link.url" 
+            class="mr-4 mb-2 text-sm text-gray-600 hover:text-orange-500"
+          >
+            {{ link.name }}
+          </NuxtLink>
+        </div>
+      </div>
+      <div class="mb-4">
+        <h3 class="text-base font-semibold mb-3">地区：</h3>
+        <div class="flex flex-wrap">
+          <NuxtLink 
+            v-for="(link, index) in regionLinks" 
+            :key="index" 
+            :to="link.url" 
+            class="mr-4 mb-2 text-sm text-gray-600 hover:text-orange-500"
+          >
+            {{ link.name }}
+          </NuxtLink>
+        </div>
+      </div>
+      <div>
+        <h3 class="text-base font-semibold mb-3">友情链接：</h3>
         <div class="flex flex-wrap">
           <a 
-            v-for="link in links" 
-            :key="link.id" 
+            v-for="(link, index) in friendLinks" 
+            :key="index" 
             :href="link.url" 
-            target="_blank"
-            rel="noopener noreferrer"
-            class="inline-flex items-center mr-4 mb-2 text-gray-600 hover:text-blue-600"
+            target="_blank" 
+            class="mr-4 mb-2 text-sm text-gray-600 hover:text-orange-500"
           >
-            <img v-if="link.logo" :src="link.logo" :alt="link.name" class="h-6 w-auto mr-1" />
-            <span>{{ link.name }}</span>
+            {{ link.name }}
           </a>
         </div>
       </div>
-      
-      <!-- 底部导航 -->
-      <div class="flex flex-wrap justify-between mb-6">
-        <div class="w-full md:w-auto mb-4 md:mb-0">
-          <div class="mb-2">
-            <img v-if="siteConfig.siteLogo" :src="siteConfig.siteLogo" :alt="siteConfig.siteName" class="h-8" />
-            <div v-else class="text-xl font-bold">{{ siteConfig.siteName || 'WZ-FRONT-WEB' }}</div>
+    </div>
+    
+    <!-- 底部导航与版权信息 -->
+    <div class="bg-gray-100 py-6">
+      <div class="container mx-auto px-4">
+        <div class="flex flex-col md:flex-row justify-between items-center mb-4">
+          <div class="flex mb-4 md:mb-0">
+            <NuxtLink 
+              v-for="(link, index) in footerNavLinks" 
+              :key="index" 
+              :to="link.url"
+              class="mx-2 text-sm text-gray-600 hover:text-orange-500"
+            >
+              {{ link.name }}
+            </NuxtLink>
           </div>
-          <p class="text-sm text-gray-500">{{ siteConfig.seoDescription }}</p>
-        </div>
-        
-        <div class="w-full md:w-auto">
-          <div class="grid grid-cols-2 md:grid-cols-3 gap-6">
-            <div>
-              <h4 class="font-medium mb-2">关于我们</h4>
-              <ul class="text-sm text-gray-500">
-                <li class="mb-1"><NuxtLink to="/about" class="hover:text-blue-600">关于我们</NuxtLink></li>
-                <li class="mb-1"><NuxtLink to="/legal/privacy" class="hover:text-blue-600">隐私政策</NuxtLink></li>
-                <li class="mb-1"><NuxtLink to="/legal/terms" class="hover:text-blue-600">服务条款</NuxtLink></li>
-              </ul>
-            </div>
-            
-            <div>
-              <h4 class="font-medium mb-2">服务支持</h4>
-              <ul class="text-sm text-gray-500">
-                <li class="mb-1"><NuxtLink to="/help" class="hover:text-blue-600">帮助中心</NuxtLink></li>
-                <li class="mb-1"><NuxtLink to="/feedback" class="hover:text-blue-600">意见反馈</NuxtLink></li>
-                <li class="mb-1"><NuxtLink to="/contact" class="hover:text-blue-600">联系我们</NuxtLink></li>
-              </ul>
-            </div>
-            
-            <div>
-              <h4 class="font-medium mb-2">联系方式</h4>
-              <ul class="text-sm text-gray-500">
-                <li v-if="siteConfig.contactEmail" class="mb-1">
-                  <span>邮箱：{{ siteConfig.contactEmail }}</span>
-                </li>
-                <li v-if="siteConfig.contactPhone" class="mb-1">
-                  <span>电话：{{ siteConfig.contactPhone }}</span>
-                </li>
-                <li v-if="siteConfig.address" class="mb-1">
-                  <span>地址：{{ siteConfig.address }}</span>
-                </li>
-              </ul>
-            </div>
+          <div class="flex space-x-4">
+            <a href="#" class="text-gray-600 hover:text-orange-500">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+            </a>
+            <a href="#" class="text-gray-600 hover:text-orange-500">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+              </svg>
+            </a>
           </div>
         </div>
-      </div>
-      
-      <!-- 版权信息 -->
-      <div class="border-t border-gray-200 pt-6 text-center text-sm text-gray-500">
-        <p>{{ siteConfig.copyright || `© ${new Date().getFullYear()} ${siteConfig.siteName || 'WZ-FRONT-WEB'}. 保留所有权利。` }}</p>
-        <p v-if="siteConfig.icpNumber" class="mt-1">
-          <a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener noreferrer">{{ siteConfig.icpNumber }}</a>
-        </p>
+        <div class="text-center text-sm text-gray-600">
+          <p>版权所有 © {{ currentYear }} 万知网 (wz.gg). 保留所有权利.</p>
+          <p class="mt-1">浙ICP备15001930号-1 | 浙公网安备33011102000046号</p>
+          <p class="mt-1">地址：浙江省杭州市余杭区仓前街道1158号</p>
+        </div>
       </div>
     </div>
   </footer>
 </template>
 
 <script setup>
-const siteConfig = ref({
-  siteName: '',
-  siteLogo: '',
-  seoDescription: '',
-  copyright: '',
-  icpNumber: '',
-  contactEmail: '',
-  contactPhone: '',
-  address: ''
-})
+import { computed } from 'vue'
 
-const links = ref([])
+// 当前年份
+const currentYear = computed(() => new Date().getFullYear())
 
-// 获取站点配置
-const fetchSiteConfig = async () => {
-  try {
-    // 这里可以替换为实际API调用
-    // const res = await $fetch('/api/site/config')
-    // siteConfig.value = res.data
-    
-    // 模拟数据
-    siteConfig.value = {
-      siteName: 'WZ 前端示例',
-      siteLogo: '',
-      seoDescription: '基于 Vue3 的多端响应式站点，支持 SSR 和独立站点生成。',
-      copyright: `© ${new Date().getFullYear()} WZ-FRONT-WEB. 保留所有权利。`,
-      icpNumber: '浙ICP备XXXXXXXX号',
-      contactEmail: 'support@example.com',
-      contactPhone: '400-XXX-XXXX',
-      address: '浙江省杭州市'
-    }
-  } catch (error) {
-    console.error('获取站点配置失败:', error)
-  }
-}
+// 主题链接
+const themeLinks = [
+  { name: '私立学校', url: '/theme/private-school' },
+  { name: '建筑', url: '/theme/building' },
+  { name: '医药', url: '/theme/medicine' },
+  { name: '科技', url: '/theme/tech' },
+  { name: '工业', url: '/theme/industry' },
+  { name: '服务', url: '/theme/service' },
+  { name: '农业', url: '/theme/agriculture' },
+  { name: '装修', url: '/theme/decoration' },
+  { name: '贸易', url: '/theme/trade' },
+  { name: '制造', url: '/theme/manufacturing' }
+]
 
-// 获取友情链接
-const fetchLinks = async () => {
-  try {
-    // 这里可以替换为实际API调用
-    // const res = await $fetch('/api/links')
-    // links.value = res.data
-    
-    // 模拟数据
-    links.value = [
-      { id: 1, name: '百度', url: 'https://www.baidu.com', logo: '' },
-      { id: 2, name: '腾讯', url: 'https://www.qq.com', logo: '' },
-      { id: 3, name: '阿里巴巴', url: 'https://www.alibaba.com', logo: '' },
-      { id: 4, name: '京东', url: 'https://www.jd.com', logo: '' }
-    ]
-  } catch (error) {
-    console.error('获取友情链接失败:', error)
-  }
-}
+// 行业链接
+const industryLinks = [
+  { name: '工业设备', url: '/industry/equipment' },
+  { name: '农业机械', url: '/industry/agricultural-machinery' },
+  { name: '电子设备', url: '/industry/electronic' },
+  { name: '服装纺织', url: '/industry/textile' },
+  { name: '食品饮料', url: '/industry/food-beverage' },
+  { name: '建筑材料', url: '/industry/building-materials' },
+  { name: '医疗器械', url: '/industry/medical-equipment' },
+  { name: '化工原料', url: '/industry/chemical' },
+  { name: '包装材料', url: '/industry/packaging' },
+  { name: '办公用品', url: '/industry/office-supplies' }
+]
 
-onMounted(() => {
-  fetchSiteConfig()
-  fetchLinks()
-})
+// 地区链接
+const regionLinks = [
+  { name: '上海', url: '/region/shanghai' },
+  { name: '北京', url: '/region/beijing' },
+  { name: '杭州', url: '/region/hangzhou' },
+  { name: '广州', url: '/region/guangzhou' },
+  { name: '深圳', url: '/region/shenzhen' },
+  { name: '重庆', url: '/region/chongqing' },
+  { name: '南京', url: '/region/nanjing' },
+  { name: '苏州', url: '/region/suzhou' },
+  { name: '武汉', url: '/region/wuhan' },
+  { name: '成都', url: '/region/chengdu' }
+]
+
+// 友情链接
+const friendLinks = [
+  { name: '工业网', url: 'https://www.gongye.com' },
+  { name: '贸易网', url: 'https://www.maoyi.com' },
+  { name: '制造网', url: 'https://www.zhizao.com' },
+  { name: '农业网', url: 'https://www.nongye.com' },
+  { name: '建筑网', url: 'https://www.jianzhu.com' },
+  { name: '医药网', url: 'https://www.yiyao.com' },
+  { name: '科技网', url: 'https://www.keji.com' },
+  { name: '装修网', url: 'https://www.zhuangxiu.com' },
+  { name: '电子商务网', url: 'https://www.dianzi.com' },
+  { name: '机械设备网', url: 'https://www.jixie.com' }
+]
+
+// 底部导航链接
+const footerNavLinks = [
+  { name: '关于我们', url: '/about' },
+  { name: '联系我们', url: '/contact' },
+  { name: '服务条款', url: '/terms' },
+  { name: '隐私政策', url: '/privacy' },
+  { name: '帮助中心', url: '/help' },
+  { name: '广告服务', url: '/ad' },
+  { name: '招聘信息', url: '/job' }
+]
 </script> 
