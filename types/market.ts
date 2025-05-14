@@ -73,4 +73,30 @@ export interface MarketSearchResult {
   page: number;
   pageSize: number;
   data: Company[];
-} 
+}
+
+/**
+ * 产品信息接口
+ */
+export interface Product {
+  id: number;
+  name: string;
+  companyId: number;
+  companyName: string;
+  category: string;
+  price: number;
+  specification?: string;
+  material?: string;
+  stock: number;
+  minOrder?: number;
+  description?: string;
+  images?: string[];
+  contactPerson?: string;
+  contactPhone?: string;
+  contactEmail?: string;
+  address?: string;
+  views: number;
+  sales: number;
+  createdAt: string;
+  updatedAt: string;
+}

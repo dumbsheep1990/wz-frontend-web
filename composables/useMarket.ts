@@ -6,7 +6,8 @@ import type {
   Category, 
   Region, 
   CompanyScale, 
-  RevenueRange 
+  RevenueRange,
+  Product
 } from '../types/market'
 import { 
   searchCompanies, 
@@ -14,7 +15,10 @@ import {
   getRegions, 
   getCompanyScales, 
   getRevenueRanges,
-  getCompanyDetail
+  getCompanyDetail,
+  getProductDetail,
+  getRelatedProducts,
+  searchProducts
 } from '../api/market'
 
 /**
@@ -83,6 +87,46 @@ export function useMarket() {
     return await getCompanyDetail(id)
   }
 
+  // 获取产品详情
+  const fetchProductDetail = async (id: number) => {
+    return await getProductDetail(id)
+  }
+
+  // 获取相关产品
+  const fetchRelatedProducts = async (id: number, limit: number = 4) => {
+    return await getRelatedProducts(id, limit)
+  }
+
+  // 产品搜索参数
+  const productSearchParams = reactive({
+    companyId: undefined as number | undefined,
+    category: '',
+    keyword: '',
+    priceMin: undefined as number | undefined,
+    priceMax: undefined as number | undefined,
+    sortBy: 'time',
+    sortOrder: 'desc',
+    page: 1,
+    pageSize: 10
+  })
+
+  // 产品搜索结果
+  const productSearchResult = reactive({
+    total: 0,
+    page: 1,
+    pageSize: 10,
+    data: [] as Product[]
+  })
+
+  // 搜索产品
+  const searchProductList = async () => {
+    const result = await searchProducts(productSearchParams)
+    Object.assign(productSearchResult, result)
+  }
+
+  // 产品列表计算属性
+  const products = computed(() => productSearchResult.data)
+
   return {
     // 状态
     searchParams,
@@ -92,12 +136,18 @@ export function useMarket() {
     companyScales,
     revenueRanges,
     companies,
+    productSearchParams,
+    productSearchResult,
+    products,
     
     // 方法
     handleSearch,
     handlePageChange,
     getTotalPages,
     fetchCategoryData,
-    fetchCompanyDetail
+    fetchCompanyDetail,
+    fetchProductDetail,
+    fetchRelatedProducts,
+    searchProductList
   }
 } 

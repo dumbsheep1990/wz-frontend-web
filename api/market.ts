@@ -1,7 +1,7 @@
 /**
  * 市场API封装
  */
-import type { MarketSearchParams, MarketSearchResult, Company, Category, Region, CompanyScale, RevenueRange } from '../types/market'
+import type { MarketSearchParams, MarketSearchResult, Company, Category, Region, CompanyScale, RevenueRange, Product } from '../types/market'
 
 /**
  * 搜索企业
@@ -229,5 +229,245 @@ export async function getRevenueRanges(): Promise<RevenueRange[]> {
   } catch (error) {
     console.error('获取营业额范围列表失败:', error)
     return []
+  }
+}
+
+/**
+ * 获取产品详情
+ * @param id 产品ID
+ * @returns 产品详情
+ */
+export async function getProductDetail(id: number): Promise<Product | null> {
+  try {
+    // 这里应该是实际API调用
+    // return await useFetch(`/api/v1/products/${id}`)
+    
+    // 模拟数据
+    return {
+      id,
+      name: "优质热轧H型钢HW250*250",
+      companyId: 1,
+      companyName: "绍兴市天宏钢贸有限公司",
+      category: "H型钢",
+      price: 5800,
+      specification: "HW250*250*9*14",
+      material: "Q235B",
+      stock: 500,
+      minOrder: 5,
+      description: "热轧H型钢，材质Q235B，规格齐全，用于建筑、桥梁等工程。我公司产品质量可靠，价格合理，交货及时，欢迎来电咨询。",
+      images: [
+        "/img/products/steel1.jpg",
+        "/img/products/steel2.jpg",
+        "/img/products/steel3.jpg"
+      ],
+      contactPerson: "张先生",
+      contactPhone: "0571-88888888",
+      contactEmail: "contact@example.com",
+      address: "江苏省 绍兴市越城区 皋埠镇111号",
+      views: 230,
+      sales: 89,
+      createdAt: "2023-05-01",
+      updatedAt: "2023-08-15"
+    }
+  } catch (error) {
+    console.error('获取产品详情失败:', error)
+    return null
+  }
+}
+
+/**
+ * 获取相关产品
+ * @param id 产品ID
+ * @param limit 限制数量
+ * @returns 相关产品列表
+ */
+export async function getRelatedProducts(id: number, limit: number = 4): Promise<Product[]> {
+  try {
+    // 这里应该是实际API调用
+    // return await useFetch(`/api/v1/products/${id}/related?limit=${limit}`)
+    
+    // 模拟数据
+    return [
+      {
+        id: 101,
+        name: "优质热轧H型钢HW200*200",
+        companyId: 1,
+        companyName: "绍兴市天宏钢贸有限公司",
+        category: "H型钢",
+        price: 5500,
+        specification: "HW200*200*8*12",
+        material: "Q235B",
+        stock: 300,
+        minOrder: 5,
+        views: 180,
+        sales: 65,
+        createdAt: "2023-06-01",
+        updatedAt: "2023-08-10"
+      },
+      {
+        id: 102,
+        name: "优质热轧H型钢HW300*300",
+        companyId: 1,
+        companyName: "绍兴市天宏钢贸有限公司",
+        category: "H型钢",
+        price: 6300,
+        specification: "HW300*300*10*15",
+        material: "Q235B",
+        stock: 200,
+        minOrder: 5,
+        views: 150,
+        sales: 45,
+        createdAt: "2023-06-15",
+        updatedAt: "2023-08-12"
+      },
+      {
+        id: 103,
+        name: "热轧工字钢I20",
+        companyId: 2,
+        companyName: "绍兴市家旺汽车销售服务中心",
+        category: "工字钢",
+        price: 5000,
+        specification: "I20",
+        material: "Q235B",
+        stock: 400,
+        minOrder: 10,
+        views: 120,
+        sales: 35,
+        createdAt: "2023-07-01",
+        updatedAt: "2023-08-05"
+      },
+      {
+        id: 104,
+        name: "角钢L5*50*50",
+        companyId: 3,
+        companyName: "钱江旅店",
+        category: "角钢",
+        price: 4800,
+        specification: "L5*50*50",
+        material: "Q235B",
+        stock: 500,
+        minOrder: 10,
+        views: 100,
+        sales: 25,
+        createdAt: "2023-07-15",
+        updatedAt: "2023-08-01"
+      }
+    ]
+  } catch (error) {
+    console.error('获取相关产品失败:', error)
+    return []
+  }
+}
+
+/**
+ * 搜索产品
+ * @param params 搜索参数
+ * @returns 产品列表搜索结果
+ */
+export async function searchProducts(params: {
+  companyId?: number;
+  category?: string;
+  keyword?: string;
+  priceMin?: number;
+  priceMax?: number;
+  sortBy?: string;
+  sortOrder?: string;
+  page?: number;
+  pageSize?: number;
+}): Promise<{
+  total: number;
+  page: number;
+  pageSize: number;
+  data: Product[];
+}> {
+  try {
+    // 这里应该是实际API调用
+    // return await useFetch('/api/v1/products', {
+    //   method: 'GET',
+    //   params
+    // })
+    
+    // 模拟数据
+    const mockProducts: Product[] = [
+      {
+        id: 101,
+        name: "优质热轧H型钢HW200*200",
+        companyId: 1,
+        companyName: "绍兴市天宏钢贸有限公司",
+        category: "H型钢",
+        price: 5500,
+        specification: "HW200*200*8*12",
+        material: "Q235B",
+        stock: 300,
+        minOrder: 5,
+        views: 180,
+        sales: 65,
+        createdAt: "2023-06-01",
+        updatedAt: "2023-08-10"
+      },
+      {
+        id: 102,
+        name: "优质热轧H型钢HW300*300",
+        companyId: 1,
+        companyName: "绍兴市天宏钢贸有限公司",
+        category: "H型钢",
+        price: 6300,
+        specification: "HW300*300*10*15",
+        material: "Q235B",
+        stock: 200,
+        minOrder: 5,
+        views: 150,
+        sales: 45,
+        createdAt: "2023-06-15",
+        updatedAt: "2023-08-12"
+      },
+      {
+        id: 103,
+        name: "热轧工字钢I20",
+        companyId: 2,
+        companyName: "绍兴市家旺汽车销售服务中心",
+        category: "工字钢",
+        price: 5000,
+        specification: "I20",
+        material: "Q235B",
+        stock: 400,
+        minOrder: 10,
+        views: 120,
+        sales: 35,
+        createdAt: "2023-07-01",
+        updatedAt: "2023-08-05"
+      },
+      {
+        id: 104,
+        name: "角钢L5*50*50",
+        companyId: 3,
+        companyName: "钱江旅店",
+        category: "角钢",
+        price: 4800,
+        specification: "L5*50*50",
+        material: "Q235B",
+        stock: 500,
+        minOrder: 10,
+        views: 100,
+        sales: 25,
+        createdAt: "2023-07-15",
+        updatedAt: "2023-08-01"
+      }
+    ]
+    
+    return {
+      total: 156,
+      page: params.page || 1,
+      pageSize: params.pageSize || 10,
+      data: mockProducts
+    }
+  } catch (error) {
+    console.error('搜索产品失败:', error)
+    return {
+      total: 0,
+      page: 1,
+      pageSize: 10,
+      data: []
+    }
   }
 } 
